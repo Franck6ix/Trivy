@@ -4,5 +4,23 @@
     "php": "8.4"
   },
   "phpExtensions": ["intl", "zip"],
-  "buildAptPackages": ["bison", "re2c"]
+  "buildAptPackages": [
+    "bison",
+    "re2c",
+    "libcurl4-openssl-dev",
+    "libreadline-dev",
+    "gettext",
+    "libicu-dev",
+    "libgd-dev",
+    "libpng-dev",
+    "libjpeg-dev",
+    "libfreetype6-dev",
+    "libpq-dev",
+    "libssl-dev",
+    "zlib1g-dev",
+    "libonig-dev",
+    "libxml2-dev",
+    "libzip-dev",
+    "libsqlite3-dev"
+  ]
 }
