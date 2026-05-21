@@ -78,9 +78,15 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "platform": {
+            "php": "8.3.0"
+        },
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "ignore": ["PKSA-q2wy-m7mz-kg58", "PKSA-jwvg-gphd-brbz", "PKSA-4fc7-y875-17k3"]
         }
     },
     "minimum-stability": "stable",

@@ -6,6 +6,14 @@ use Symfony\Component\Console\Input\ArgvInput;
 
 define('LARAVEL_START', microtime(true));
 
+// Symfony 7 rejects requests with empty HTTP_HOST (e.g. during Railpack build).
+// Set HTTP_HOST from APP_URL so config:cache / route:cache succeed in CLI.
+if (empty($_SERVER['HTTP_HOST'])) {
+    $host = parse_url((string) getenv('APP_URL'), PHP_URL_HOST) ?: 'localhost';
+    $_SERVER['HTTP_HOST'] = $host;
+    $_SERVER['SERVER_NAME'] = $host;
+}
+
 // Register the Composer autoloader...
 require __DIR__.'/vendor/autoload.php';
 

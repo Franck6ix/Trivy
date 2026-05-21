@@ -4,8 +4,156 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../app/Livewire/**/*.php';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* ─────────────────────────────────────────
+   FONTS — Trivy Design System
+   Même sélection que le prototype journey-weaver
+───────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap');
+
+/* ─────────────────────────────────────────
+   DESIGN TOKENS — Variables CSS globales
+   Source : styles.css du prototype journey-weaver
+───────────────────────────────────────── */
+:root {
+    /* Fonds */
+    --bg-cream:      #F5F0E8;
+    --bg-card:       #FEFEFE;
+    --bg-sand:       #F0EBE0;
+    --bg-secondary:  #F2EDE4;
+
+    /* Brand */
+    --navy:          #1C2B4A;
+    --gold:          #C9A84C;
+    --gold-light:    #E8D08A;
+    --gold-deep:     #A07830;
+    --green-ok:      #22C55E;
+
+    /* Textes */
+    --text-main:     #1C2B4A;
+    --text-muted:    #7A7A8A;
+    --text-light:    #A0A0B0;
+
+    /* Bordures */
+    --border:        #E2DDD4;
+
+    /* Ombres */
+    --shadow-card:   0 8px 24px -8px rgba(28, 43, 74, 0.12);
+    --shadow-phone:  0 40px 80px -20px rgba(28, 43, 74, 0.35);
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, #E8D08A, #A07830);
+    --gradient-navy: linear-gradient(160deg, #2A3F6A, #101828);
+    --gradient-sand: linear-gradient(180deg, #F5F0E8, #EDE5D8);
 }
+
+/* ─────────────────────────────────────────
+   TAILWIND v4 THEME
+   Connecte nos tokens CSS aux classes Tailwind
+───────────────────────────────────────── */
+@theme {
+    /* Typographie */
+    --font-display: 'Outfit', system-ui, sans-serif;
+    --font-sans:    'Inter', system-ui, sans-serif;
+    --font-serif:   'Instrument Serif', 'Times New Roman', serif;
+
+    /* Couleurs Trivy */
+    --color-cream:       var(--bg-cream);
+    --color-sand:        var(--bg-sand);
+    --color-card:        var(--bg-card);
+    --color-navy:        var(--navy);
+    --color-gold:        var(--gold);
+    --color-gold-light:  var(--gold-light);
+    --color-gold-deep:   var(--gold-deep);
+    --color-border:      var(--border);
+    --color-muted:       var(--text-muted);
+}
+
+/* ─────────────────────────────────────────
+   BASE — Reset et defaults
+───────────────────────────────────────── */
+@layer base {
+    * {
+        border-color: var(--border);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        background-color: var(--bg-cream);
+        color: var(--text-main);
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: 'Outfit', system-ui, sans-serif;
+        letter-spacing: -0.01em;
+    }
+}
+
+/* ─────────────────────────────────────────
+   UTILITIES — Classes réutilisables Trivy
+───────────────────────────────────────── */
+@layer utilities {
+    /* Typographie */
+    .font-display { font-family: 'Outfit', system-ui, sans-serif; }
+    .font-serif   { font-family: 'Instrument Serif', serif; }
+
+    /* Textes */
+    .text-gold    { color: var(--gold); }
+    .text-navy    { color: var(--navy); }
+    .text-muted   { color: var(--text-muted); }
+
+    /* Fonds */
+    .bg-cream     { background-color: var(--bg-cream); }
+    .bg-sand      { background-color: var(--bg-sand); }
+    .bg-gold      { background-color: var(--gold); }
+    .bg-navy      { background-color: var(--navy); }
+
+    /* Gradients */
+    .bg-gradient-gold  { background-image: var(--gradient-gold); }
+    .bg-gradient-navy  { background-image: var(--gradient-navy); }
+    .bg-gradient-sand  { background-image: var(--gradient-sand); }
+
+    /* Ombres */
+    .shadow-card  { box-shadow: var(--shadow-card); }
+    .shadow-phone { box-shadow: var(--shadow-phone); }
+
+    /* Espacement lettres du logo */
+    .tracking-brand { letter-spacing: 0.28em; }
+
+    /* Shell mobile : centré, largeur téléphone */
+    .mobile-shell {
+        width: 100%;
+        max-width: 390px;
+        min-height: 100dvh;
+        margin-inline: auto;
+        position: relative;
+        overflow-x: hidden;
+    }
+}
+
+/* ─────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────── */
+@keyframes trivy-bob {
+    0%, 100% { transform: translateY(-4px) rotate(-1deg); }
+    50%       { transform: translateY(4px)  rotate(1deg);  }
+}
+
+@keyframes trivy-fadein {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes trivy-spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.animate-bob       { animation: trivy-bob 2.6s ease-in-out infinite; }
+.animate-fadein    { animation: trivy-fadein 0.5s ease-out both; }
+.animate-spin-slow { animation: trivy-spin-slow 8s linear infinite; }
