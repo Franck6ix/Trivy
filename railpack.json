@@ -3,5 +3,6 @@
   "packages": {
     "php": "8.4"
   },
-  "phpExtensions": ["intl", "zip"]
+  "phpExtensions": ["intl", "zip"],
+  "buildAptPackages": ["bison", "re2c"]
 }
